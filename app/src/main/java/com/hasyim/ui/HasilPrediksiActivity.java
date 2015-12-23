@@ -8,8 +8,9 @@ import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.widget.TextView;
 
-import com.hasyim.response.HasilEntity;
+import com.hasyim.response.HasilPrediksiResponse;
 import com.hasyim.spkbayes.R;
+import com.hasyim.util.Constanta;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
@@ -32,43 +33,25 @@ public class HasilPrediksiActivity extends AppCompatActivity {
     @Bind(R.id.txt_hasil_status)
     TextView txtHasilStatus;
 
-    private String URL_HASIL = "http://kaptenkomodo.bl.ee/spk/api/prosesBayes.php";
-
-    //List<HasilEntity> items = new ArrayList<>();
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.fragment_hasil_prediksi);
         ButterKnife.bind(this);
 
-        HasilEntity hasilEntity = (HasilEntity)getIntent().getExtras().getSerializable("hasilPerhitungan");
-        System.out.println(hasilEntity);
-
-
-
-
+        getDataIntent();
     }
 
-    /*public void getDataFromJson() {
-        StringRequest request = new StringRequest(Request.Method.POST, URL_HASIL,
-                new Response.Listener<String>() {
-                    @Override
-                    public void onResponse(String response) {
-                        HasilResponse hasilResponse = new Gson().fromJson(response, HasilResponse.class);
-                        System.out.println("hasilResponse : " + hasilResponse);
+    private void getDataIntent(){
 
-                        HasilEntity hasilEntity = new Gson().fromJson(response, HasilEntity.class);
-                        System.out.println("hasil entity : " + hasilEntity);
+        Bundle data = getIntent().getExtras();
+        HasilPrediksiResponse response = (HasilPrediksiResponse) data.getSerializable(Constanta.HASIL);
 
-                    }
-                }, new Response.ErrorListener() {
-            @Override
-            public void onErrorResponse(VolleyError error) {
-
-            }
-        });
-        CustomApp.getInstance().addToRequestQueue(request);
-    }*/
+        txtNoToko.setText(response.hasil.notoko);
+        txtAlamat.setText(response.hasil.alamat);
+        txtHasilStatus.setText(response.hasil.status);
+        txtHasilTidakLayak.setText(response.hasil.hasilTidakLayak);
+        txtYaDibagiTidak.setText(response.hasil.yabandingtidak);
+        txtHasilLayak.setText(response.hasil.hasilLayak);
+    }
 }

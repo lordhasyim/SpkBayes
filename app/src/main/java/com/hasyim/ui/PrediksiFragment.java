@@ -11,7 +11,6 @@ import android.view.ViewGroup;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
-import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -20,12 +19,11 @@ import com.android.volley.error.VolleyError;
 import com.android.volley.request.StringRequest;
 import com.google.gson.Gson;
 import com.hasyim.app.CustomApp;
+import com.hasyim.model.PrediksiModel;
 import com.hasyim.response.HasilEntity;
-import com.hasyim.response.HasilResponse;
+import com.hasyim.response.HasilPrediksiResponse;
 import com.hasyim.spkbayes.R;
-
-import org.json.JSONException;
-import org.json.JSONObject;
+import com.hasyim.util.Constanta;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -110,20 +108,23 @@ public class PrediksiFragment extends Fragment {
 
     //variabel penampung untuk nantinya di kirim dengan method POST
     //penamaan variabel disesuaikan dengan bagian $_POST['name_variable'] yang ada di server php
-    String notoko;
-    String alamatLokasi;
-    String s_mrBread;
-    String s_sariroti;
-    String luas_lokasi;
-    String besar_daya;
-    String p_induk;
-    String kompetitor;
-    String akses_lokasi;
-    String t_konsumen;
-    String dt_konsumen;
-    String izin_dinkes;
 
-    private String URL_PREDIKSI = "http://kaptenkomodo.bl.ee/spk/api/prosesBayes.php";
+//    Terapkan OOP saja
+//    String notoko;
+//    String alamatLokasi;
+//    String s_mrBread;
+//    String s_sariroti;
+//    String luas_lokasi;
+//    String besar_daya;
+//    String p_induk;
+//    String kompetitor;
+//    String akses_lokasi;
+//    String t_konsumen;
+//    String dt_konsumen;
+//    String izin_dinkes;
+
+    //prediksi model
+    PrediksiModel prediksi = new PrediksiModel();
 
     List<HasilEntity> items = new ArrayList<>();
 
@@ -142,10 +143,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_smBread_ya:
-                        s_mrBread = "diatas 500000";
+                        prediksi.setS_mrBread("diatas 500000");
                         break;
                     case R.id.radio_smBread_tidak:
-                        s_mrBread = "dibawah 500000";
+                        prediksi.setS_mrBread("dibawah 500000");
                         break;
                 }
             }
@@ -159,10 +160,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_ssari_ya:
-                        s_sariroti = "diatas 500000";
+                        prediksi.setS_sariroti("diatas 500000");
                         break;
                     case R.id.radio_ssari_tidak:
-                        s_sariroti = "dibawah 500000";
+                        prediksi.setS_sariroti("dibawah 500000");
                         break;
                 }
             }
@@ -177,10 +178,11 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_lokasiAda:
-                        luas_lokasi = "ada";
+                        prediksi.setLuas_lokasi("ada");
                         break;
                     case R.id.radio_lokasiTidakAda:
-                        luas_lokasi = "tidak_ada";
+                        prediksi.setLuas_lokasi("tidak ada");
+                        break;
                 }
             }
         });
@@ -194,10 +196,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_bd_sanggup:
-                        besar_daya = "sanggup";
+                        prediksi.setBesar_daya("sanggup");
                         break;
                     case R.id.radio_bd_tidak:
-                        besar_daya = "tidak_sanggup";
+                        prediksi.setBesar_daya("tidak_sanggup");
                         break;
                 }
             }
@@ -212,10 +214,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_induk_bisa:
-                        p_induk = "bisa";
+                        prediksi.setP_induk("bisa");
                         break;
                     case R.id.radio_induk_tidak:
-                        p_induk = "tidak_bisa";
+                        prediksi.setP_induk("tidak_bisa");
                         break;
                 }
             }
@@ -230,10 +232,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_k_banyak:
-                        kompetitor = "banyak";
+                        prediksi.setKompetitor("banyak");
                         break;
                     case R.id.radio_k_sedikit:
-                        kompetitor = "sedikit";
+                        prediksi.setKompetitor("sedikit");
                         break;
                 }
             }
@@ -247,10 +249,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_al_mudah:
-                        akses_lokasi = "mudah";
+                        prediksi.setAkses_lokasi("mudah");
                         break;
                     case R.id.radio_al_sulit:
-                        akses_lokasi = "sulit";
+                        prediksi.setAkses_lokasi("sulit");
                         break;
                 }
             }
@@ -264,10 +266,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_target_besar:
-                        t_konsumen = "besar";
+                        prediksi.setT_konsumen("besar");
                         break;
                     case R.id.radio_target_kecil:
-                        t_konsumen = "kecil";
+                        prediksi.setT_konsumen("kecil");
                         break;
                 }
             }
@@ -281,10 +283,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_dt_tertarik:
-                        dt_konsumen = "tertarik";
+                        prediksi.setDt_konsumen("tertarik");
                         break;
                     case R.id.radio_dt_tidak_tertarik:
-                        dt_konsumen = "tidak_tertarik";
+                        prediksi.setDt_konsumen("tidak_tertarik");
                         break;
                 }
             }
@@ -299,10 +301,10 @@ public class PrediksiFragment extends Fragment {
             public void onCheckedChanged(RadioGroup group, int checkedId) {
                 switch (checkedId) {
                     case R.id.radio_izin_disetujui:
-                        izin_dinkes = "disetujui";
+                        prediksi.setIzin_dinkes("disetujui");
                         break;
                     case R.id.radio_izin_tidak:
-                        izin_dinkes = "tidak_disetujui";
+                        prediksi.setIzin_dinkes("tidak_disetujui");
                         break;
                 }
             }
@@ -312,28 +314,10 @@ public class PrediksiFragment extends Fragment {
             @Override
             public void onClick(View v) {
                 //ambil value dr edittext
-                notoko = edtIdToko.getText().toString();
-                alamatLokasi = edtAlamatToko.getText().toString();
-
-                //utk cek value apakah sudah sesuai di logcat
-                System.out.println("no toko : " + notoko);
-                System.out.println("alamat : " + alamatLokasi);
-                System.out.println("kriteria 1 : " + s_mrBread);
-                System.out.println("kriteria 2 : " + s_sariroti);
-                System.out.println("kriteria 3 : " + luas_lokasi);
-                System.out.println("kriteria 4 : " + besar_daya);
-                System.out.println("kriteria 5 : " + p_induk);
-                System.out.println("kriteria 6 : " + kompetitor);
-                System.out.println("kriteria 7 : " + akses_lokasi);
-                System.out.println("kriteria 8 : " + t_konsumen);
-                System.out.println("kriteria 9 : " + dt_konsumen);
-                System.out.println("kriteria 10 : " + izin_dinkes);
-                //end cek value
+                prediksi.setNotoko(edtIdToko.getText().toString());
+                prediksi.setAlamatLokasi(edtAlamatToko.getText().toString());
 
                 sendDataToServer();
-                //getDataFromJson();
-
-
             }
         });
 
@@ -342,36 +326,24 @@ public class PrediksiFragment extends Fragment {
         return rootView;
     }
 
-
-
     private void sendDataToServer() {
-        StringRequest request = new StringRequest(Request.Method.POST, URL_PREDIKSI,
+        StringRequest request = new StringRequest(Request.Method.POST, Constanta.URL_PREDIKSI,
                 new Response.Listener<String>() {
                     @Override
                     public void onResponse(String response) {
+
                         if (response != null) {
-                        }
+
+                            System.out.println("hasilnya " + response);
+
                             //check di logcat
-                            System.out.println("prediksi Fragment : "+response);
+                            HasilPrediksiResponse hasil = new Gson().fromJson(response, HasilPrediksiResponse.class);
 
-                        try {
-                            JSONObject jsonObject =new JSONObject(response);
-                            if (jsonObject.names().get(0).equals("hasil")){
-                                Toast.makeText(getActivity(),"hasil"+jsonObject.getString("hasil"),
-                                        Toast.LENGTH_SHORT).show();
-                                HasilResponse hasilResponse = new Gson().fromJson(response, HasilResponse.class);
+                            Intent intent = new Intent(getActivity(), HasilPrediksiActivity.class);
+                            intent.putExtra(Constanta.HASIL, hasil);
+                            startActivity(intent);
 
-                                items.addAll(hasilResponse.getDataHasil());
-                                Intent intent = new Intent(getActivity(), HasilPrediksiActivity.class);
-                                System.out.println(items);
-                                //intent.putExtra("hasilPerhitungan",  hasilResponse);
-                                startActivity(intent);
-
-                            }
-                        } catch (JSONException e) {
-                            e.printStackTrace();
                         }
-
                     }
                 }, new Response.ErrorListener() {
             @Override
@@ -384,18 +356,18 @@ public class PrediksiFragment extends Fragment {
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
-                parameters.put("notoko", notoko);
-                parameters.put("alamatLokasi",alamatLokasi);
-                parameters.put("s_mrBread", s_mrBread);
-                parameters.put("s_sariroti", s_sariroti);
-                parameters.put("luas_lokasi", luas_lokasi);
-                parameters.put("besar_daya", besar_daya);
-                parameters.put("p_induk", p_induk);
-                parameters.put("kompetitor", kompetitor);
-                parameters.put("akses_lokasi", akses_lokasi);
-                parameters.put("t_konsumen", t_konsumen);
-                parameters.put("dt_konsumen", dt_konsumen);
-                parameters.put("izin_dinkes", izin_dinkes);
+                parameters.put(Constanta.NO_TOKO, prediksi.getNotoko());
+                parameters.put(Constanta.ALAMAT, prediksi.getAlamatLokasi());
+                parameters.put(Constanta.MRBREAD, prediksi.getS_mrBread());
+                parameters.put(Constanta.SARI_ROTI, prediksi.getS_sariroti());
+                parameters.put(Constanta.LUAS, prediksi.getLuas_lokasi());
+                parameters.put(Constanta.DAYA, prediksi.getBesar_daya());
+                parameters.put(Constanta.INDUK, prediksi.getP_induk());
+                parameters.put(Constanta.KOMPETITOR, prediksi.getKompetitor());
+                parameters.put(Constanta.AKSES_LOKASI, prediksi.getAkses_lokasi());
+                parameters.put(Constanta.T_KONSUMEN, prediksi.getT_konsumen());
+                parameters.put(Constanta.DT_KONSUMEN, prediksi.getDt_konsumen());
+                parameters.put(Constanta.IZIN_DINKES, prediksi.getIzin_dinkes());
                 return parameters;
             }
         };

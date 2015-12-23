@@ -15,7 +15,7 @@ import butterknife.ButterKnife;
  */
 
 
-public class  DetailDataFragment extends AppCompatActivity {
+public class DetailDataFragment extends AppCompatActivity {
 
     @Bind(R.id.txt_id)
     TextView textId;
