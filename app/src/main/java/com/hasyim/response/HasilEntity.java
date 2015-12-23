@@ -6,6 +6,7 @@ import java.io.Serializable;
  * Created by Diiyo on 12/20/15.
  */
 public class HasilEntity implements Serializable {
+
     private String notoko;
     private String alamat;
     private String p_layak;
