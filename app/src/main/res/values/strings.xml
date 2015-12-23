@@ -1,0 +1,41 @@
+<resources>
+    <string name="app_name">SpkBayes</string>
+
+    <string name="navigation_drawer_open">Open navigation drawer</string>
+    <string name="navigation_drawer_close">Close navigation drawer</string>
+
+    <string name="action_settings">Settings</string>
+
+    <!--radio button value utk input data-->
+    <!--variabel sales mr.bread-->
+    <string name="radio_sm_ya">Sales Mr.bread Diatas 500</string>
+    <string name="radio_sm_tidak">Sales Mr.bread Dibawah 500</string>
+    <!--variable sales sari roti-->
+    <string name="radio_ss_ya">Sales Sari Roti Diatas 500</string>
+    <string name="radio_ss_tidak">Sales Sari Roti Dibawah 500</string>
+    <!--variable luas lokasi-->
+    <string name="radio_luas_ada">Ada</string>
+    <string name="radio_luas_tidak">tidak ada</string>
+    <string name="radio_bd_sanggup">Sanggup</string>
+    <string name="radio_bd_tidak">Tidak Sanggup</string>
+    <string name="radio_il_bisa">Bisa Dipecah</string>
+    <string name="radio_il_tidak">Tidak bisa di pecah</string>
+    <string name="radio_k_banyak">Banyak</string>
+    <string name="radio_k_sedang">Sedang</string>
+    <string name="radio_k_tidak_ada">Tidak Ada</string>
+    <string name="radio_al_mudah">Mudah Dijangkau</string>
+    <string name="radio_al_sulit">Sulit Dijangkau</string>
+    <string name="radio_tk_mhs">Mahasiswa</string>
+    <string name="radio_tk_karyawan">Karyawan</string>
+    <string name="radio_tk_umum">Umum</string>
+    <string name="radio_dt_tertarik">Tertarik</string>
+    <string name="radio_dt_tidak_tertarik">Tidak Tertarik</string>
+    <string name="radio_izin_disetujui">Disetujui</string>
+    <string name="radio_izin_tidak">Tidak Disetujui</string>
+    <string name="radio_s_layak">Layak</string>
+    <string name="radio_s_tidak_layak">Tidak Layak</string>
+    <string name="txt_radio_target_besar">Besar</string>
+    <string name="txt_radio_target_kecil">Kecil</string>
+
+
+</resources>
