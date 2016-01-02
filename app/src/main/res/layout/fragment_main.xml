@@ -1,40 +1,90 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/mainMenuFragment"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="@drawable/bg">
 
-
-    <RelativeLayout
+    <FrameLayout
+        android:id="@+id/mainFragmentLayout"
         android:layout_width="match_parent"
         android:layout_height="match_parent">
 
-        <ImageView
-            android:id="@+id/imageView2"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_alignParentTop="true"
-            android:layout_centerHorizontal="true"
-            android:layout_gravity="center_horizontal|top"
-            android:layout_marginTop="39dp"
-            android:src="@drawable/logo" />
+        <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:id="@+id/scrollView"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
 
-        <Button
-            android:id="@+id/btn_ok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_centerHorizontal="true"
-            android:layout_centerVertical="true"
-            android:text="New Button" />
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginLeft="10dp"
+                android:layout_marginRight="10dp"
+                android:paddingBottom="25dp">
 
-        <Button
-            android:id="@+id/btn_cancel"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_below="@+id/btn_ok"
-            android:layout_centerHorizontal="true"
-            android:text="New Button" />
-    </RelativeLayout>
+                <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                    android:id="@+id/profile_image"
+                    android:layout_width="150dp"
+                    android:layout_height="150dp"
+                    android:layout_alignParentTop="true"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="25dp"
+                    android:src="@drawable/logo_saybread"
+                    app:civ_border_color="#FF000000"
+                    app:civ_border_width="1dp" />
+
+                <Button
+                    android:id="@+id/btn_prediksi"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/profile_image"
+                    android:layout_centerHorizontal="true"
+                    android:layout_marginTop="75dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Prediksi"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_lihat_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btn_prediksi"
+                    android:layout_alignStart="@+id/btn_prediksi"
+                    android:layout_below="@+id/btn_prediksi"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Lhat Data"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_tambah_data"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btn_lihat_data"
+                    android:layout_alignStart="@+id/btn_lihat_data"
+                    android:layout_below="@+id/btn_lihat_data"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Tambah Data"
+                    android:textColor="@android:color/white" />
+
+                <Button
+                    android:id="@+id/btn_petunjuk"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_alignLeft="@+id/btn_tambah_data"
+                    android:layout_alignStart="@+id/btn_tambah_data"
+                    android:layout_below="@+id/btn_tambah_data"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Petunjuk"
+                    android:textColor="@android:color/white"
+
+                    />
 
 
+            </RelativeLayout>
+        </android.support.v4.widget.NestedScrollView>
+    </FrameLayout>
 </LinearLayout>

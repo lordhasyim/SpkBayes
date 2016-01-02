@@ -11,6 +11,7 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.android.volley.Request;
 import com.android.volley.Response;
@@ -108,7 +109,7 @@ public class InputDataFragment extends Fragment {
     @Bind(R.id.fabKirimData)
     FloatingActionButton fabKirimData;
 
-    private String URL_INPUT_DATA = "http://10.0.3.2/spk/api/inputData.php";
+    private String URL_INPUT_DATA = "http://kaptenkomodo.bl.ee/spk/api/inputData.php";
     private Button btnTambahData;
 
     //variabel penampung untuk nantinya di kirim dengan method POST
@@ -370,6 +371,7 @@ public class InputDataFragment extends Fragment {
             public void onResponse(String response) {
                 if (response != null) {
                     System.out.println(response);
+
                 }
 
             }
@@ -403,6 +405,7 @@ public class InputDataFragment extends Fragment {
         CustomApp.getInstance().addToRequestQueue(request);
 
         //tambahkan informasi juga data berhasil dikirim
+        Toast.makeText(getActivity(),"Data Berhasil Di input", Toast.LENGTH_SHORT).show();
     }
 
     @Override

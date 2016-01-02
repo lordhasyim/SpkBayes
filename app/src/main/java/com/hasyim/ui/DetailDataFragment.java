@@ -1,9 +1,18 @@
 package com.hasyim.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.View;
+import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
+import com.android.volley.Request;
+import com.android.volley.Response;
+import com.android.volley.error.VolleyError;
+import com.android.volley.request.StringRequest;
+import com.hasyim.app.CustomApp;
 import com.hasyim.response.ViewData;
 import com.hasyim.spkbayes.R;
 
@@ -45,6 +54,8 @@ public class DetailDataFragment extends AppCompatActivity {
     TextView textIzinDinkes;
     @Bind(R.id.txt_status)
     TextView textStatus;
+    @Bind(R.id.btnHapusData)
+    Button btnHapusData;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -53,10 +64,16 @@ public class DetailDataFragment extends AppCompatActivity {
         ButterKnife.bind(this);
 
 
-        ViewData viewData = (ViewData)getIntent().getExtras().getSerializable("viewdata");
+
+
+        ViewData viewData = (ViewData) getIntent().getExtras().getSerializable("viewdata");
         System.out.println(viewData);
 
-       //textId.setText(viewData.getId().toString());
+        //url delete dengan parameter diambil dari id
+        final String idDelete = viewData.getId();
+        final String URL_DELETE = "http://kaptenkomodo.bl.ee/spk/api/deleteData.php?id="+idDelete;
+
+        //textId.setText(viewData.getId().toString());
 
         textId.setText(viewData.getId());
         textNoToko.setText(viewData.getNo_toko());
@@ -72,20 +89,59 @@ public class DetailDataFragment extends AppCompatActivity {
         textDayaTarik.setText(viewData.getDaya_tarik());
         textIzinDinkes.setText(viewData.getIzin_dinkes());
         textStatus.setText(viewData.getStatus());
+
+        btnHapusData.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                //check logcat apakah url dan id sudah sesuai
+                System.out.println("idDelete : " + idDelete);
+                System.out.println("Url Delete : " + URL_DELETE);
+
+                //sendDataToServer
+                StringRequest request = new StringRequest(Request.Method.POST, URL_DELETE,
+                        new Response.Listener<String>() {
+                            @Override
+                            public void onResponse(String response) {
+                                //check logcat
+                                System.out.println("request delete : " + response);
+
+                                if (response != null) {
+                                    Toast.makeText(getApplicationContext(), "Berhasil Menghapus data",
+                                            Toast.LENGTH_SHORT).show();
+                                    MoveToLihatData();
+                                }
+                            }
+                        }, new Response.ErrorListener() {
+                    @Override
+                    public void onErrorResponse(VolleyError error) {
+                        error.printStackTrace();
+                    }
+                });
+                CustomApp.getInstance().addToRequestQueue(request);
+            }
+        });
+
     }
 
-    /* @Nullable
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
+    private void MoveToLihatData() {
+        /*Fragment newFragment = new MainFragment();
+        FragmentTransaction ft = getSupportFragmentManager().beginTransaction();
+        ft.add(R.id.mainMenuFragment, newFragment);
+        ft.commit();*/
 
-        View rootView = inflater.inflate(R.layout.fragment_detail_data, container, false);
+        Intent intent = new Intent(DetailDataFragment.this, MainActivity.class);
+        startActivity(intent);
 
-        Bundle bundle = getArguments();
-        ViewData viewdata = (ViewData)bundle.getSerializable("viewdata");
 
-        //gawe ngecek tok..
-        System.out.println(viewdata);
-        return rootView;
+    }
 
-    }*/
+/*
+    private void sendDataToServer() {
+
+        StringRequest request = new StringRequest(Request.Method.POST, URL_DELETE
+
+    }
+*/
+
+
 }

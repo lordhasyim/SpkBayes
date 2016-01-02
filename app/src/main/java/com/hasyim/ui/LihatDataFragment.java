@@ -38,6 +38,8 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
     List<ViewData> items = new ArrayList<>();
     ViewDataAdapter adapter;
 
+    public static final String URL_VIEW_DATA ="http://kaptenkomodo.bl.ee/spk/api/viewData.php";
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
@@ -65,7 +67,7 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
     }
 
     public void getDataFromJson(){
-        StringRequest request = new StringRequest(Request.Method.GET, "http://kaptenkomodo.bl.ee/spk/api/viewData.php",
+        StringRequest request = new StringRequest(Request.Method.GET, URL_VIEW_DATA ,
                 new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
@@ -99,15 +101,6 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
         intent.putExtra("viewdata", viewData);
         startActivity(intent);
 
-
-        //Toast.makeText(getActivity(),"bisa di klik, data ke : "+position,Toast.LENGTH_SHORT).show();
-        /*Bundle bundle = new Bundle();
-        bundle.putSerializable("DATA", ViewData);
-        intent.putExtras(bundle);*/
-        //ViewData viewData = new ViewData();
-        //intent.putExtra("viewdata",viewData);
-        //intent.putExtra("viewdata",(Serializable)viewData);
-        //intent.putExtra("tahu", adapter.getItemId(position));
 
     }
 }

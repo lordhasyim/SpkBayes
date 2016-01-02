@@ -9,13 +9,14 @@
     android:paddingBottom="@dimen/activity_vertical_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin"
     android:paddingRight="@dimen/activity_horizontal_margin"
-    android:paddingTop="@dimen/activity_vertical_margin"
-    tools:context="com.codelab.hasyim.spkapp.InputData">
-<LinearLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:paddingTop="@dimen/activity_vertical_margin">
 
+<RelativeLayout
+    android:id="@+id/prediksi_area"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
     <TextView
+        android:id="@+id/txt_judul_prediksi"
         android:layout_width="match_parent"
         android:layout_height="30dp"
         android:text="Prediksi"
@@ -24,7 +25,7 @@
         android:background="@color/colorAccent"
         android:textColor="@android:color/white"
         />
-</LinearLayout>
+
 
 
     <android.support.v4.widget.NestedScrollView
@@ -32,7 +33,9 @@
         xmlns:tools="http://schemas.android.com/tools"
         android:id="@+id/scrollView"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content">
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/txt_judul_prediksi"
+        >
 
         <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
             android:id="@+id/mainLinear"
@@ -401,6 +404,7 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
+                        android:layout_marginBottom="35dp"
                         android:orientation="vertical">
 
                         <TextView
@@ -435,7 +439,9 @@
 
         </LinearLayout>
 
+
     </android.support.v4.widget.NestedScrollView>
+
 
     <android.support.design.widget.FloatingActionButton
         android:id="@+id/fabPrediksi"
@@ -444,8 +450,12 @@
         android:layout_margin="16dp"
         android:clickable="true"
         android:src="@android:drawable/ic_menu_send"
-        app:layout_anchor="@id/mainLinear"
-        app:layout_anchorGravity="bottom|end"
-        />
+        android:layout_gravity="end"
+        android:layout_alignParentTop="false"
+        android:layout_alignParentEnd="false"
+        android:layout_alignParentBottom="true"
+        android:layout_alignParentRight="true"
 
+        />
+</RelativeLayout>
 </android.support.design.widget.CoordinatorLayout>
