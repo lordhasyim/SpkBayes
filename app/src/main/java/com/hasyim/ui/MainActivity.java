@@ -1,5 +1,6 @@
 package com.hasyim.ui;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.NavigationView;
 import android.support.v4.app.FragmentManager;
@@ -97,6 +98,9 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_petunjuk) {
             fm.beginTransaction().replace(R.id.content_frame, new PetunjukFragment()).commit();
 
+        } else if (id == R.id.nav_lihat_peta){
+            Intent intentPeta = new Intent(MainActivity.this, MapsActivity.class);
+            startActivity(intentPeta);
 
 
         } else if (id == R.id.nav_pengembang) {

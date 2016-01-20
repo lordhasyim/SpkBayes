@@ -218,7 +218,7 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
                                         intent.putExtra("lokasi_id", mdata.get("lokasi_id"));
                                         intent.putExtra("lokasi_no_toko", mdata.get("lokasi_no_toko"));
-                                        intent.putExtra("lokasi_alamat", mdata.get("lokasi_almat"));
+                                        intent.putExtra("lokasi_alamat", mdata.get("lokasi_alamat"));
                                         intent.putExtra("lokasi_status", mdata.get("lokasi_status"));
 
                                         startActivity(intent);
