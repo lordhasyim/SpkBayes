@@ -15,16 +15,17 @@
             android:icon="@drawable/ic_menu_slideshow"
             android:title="Lihat Data" />
         <item
-            android:id="@+id/nav_petunjuk"
-            android:icon="@drawable/ic_menu_manage"
-            android:title="Petunjuk" />
+            android:id="@+id/nav_lihat_peta"
+            android:icon="@drawable/ic_marker"
+            android:title="Lihat Peta" />
+
     </group>
 
     <item android:title="Bantuan">
         <menu>
             <item
-                android:id="@+id/nav_tentang"
-                android:icon="@drawable/ic_menu_share"
+                android:id="@+id/nav_petunjuk"
+                android:icon="@drawable/ic_menu_manage"
                 android:title="Petunjuk" />
             <item
                 android:id="@+id/nav_pengembang"

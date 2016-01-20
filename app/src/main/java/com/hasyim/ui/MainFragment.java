@@ -1,11 +1,11 @@
 package com.hasyim.ui;
 
-import android.support.v4.app.FragmentTransaction;
-import android.support.v4.app.FragmentManager;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-
+import android.support.v4.app.FragmentManager;
+import android.support.v4.app.FragmentTransaction;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -35,6 +35,8 @@ public class MainFragment extends Fragment {
     Button btnTambahData;
     @Bind(R.id.btn_petunjuk)
     Button btnPetunjuk;
+    @Bind(R.id.btn_lihat_peta)
+    Button btnLihatPeta;
 
     @Nullable
     @Override
@@ -43,7 +45,6 @@ public class MainFragment extends Fragment {
         View rootView = inflater.inflate(R.layout.fragment_main, container, false);
 
         ButterKnife.bind(this, rootView);
-
 
 
         btnPrediksi.setOnClickListener(new View.OnClickListener() {
@@ -85,12 +86,19 @@ public class MainFragment extends Fragment {
             public void onClick(View v) {
                 FragmentManager fm = getActivity().getSupportFragmentManager();
                 FragmentTransaction ft = fm.beginTransaction();
-                PetunjukFragment petunjukFragment =new PetunjukFragment();
+                PetunjukFragment petunjukFragment = new PetunjukFragment();
                 ft.replace(R.id.content_frame, petunjukFragment);
                 ft.commit();
             }
         });
 
+        btnLihatPeta.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(getActivity(), MapsActivity.class);
+                startActivity(intent);
+            }
+        });
 
         return rootView;
     }

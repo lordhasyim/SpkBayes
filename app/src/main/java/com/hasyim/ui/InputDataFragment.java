@@ -1,8 +1,15 @@
 package com.hasyim.ui;
 
+import android.Manifest;
+import android.content.Context;
+import android.content.pm.PackageManager;
+import android.location.Location;
+import android.location.LocationListener;
+import android.location.LocationManager;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.FloatingActionButton;
+import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -108,6 +115,12 @@ public class InputDataFragment extends Fragment {
     Button btnReset;
     @Bind(R.id.fabKirimData)
     FloatingActionButton fabKirimData;
+    @Bind(R.id.edt_getlat)
+    EditText edtGetlat;
+    @Bind(R.id.edt_getlong)
+    EditText edtGetlong;
+    @Bind(R.id.btnGetLocation)
+    Button btnGetLocation;
 
     private String URL_INPUT_DATA = "http://kaptenkomodo.bl.ee/spk/api/inputData.php";
     private Button btnTambahData;
@@ -116,6 +129,8 @@ public class InputDataFragment extends Fragment {
     //penamaan variabel disesuaikan dengan bagian $_POST['name_variable'] yang ada di server php
     String notoko;
     String alamatLokasi;
+    String lat_lokasi;
+    String long_lokasi;
     String s_mrBread;
     String s_sariroti;
     String luas_lokasi;
@@ -128,6 +143,8 @@ public class InputDataFragment extends Fragment {
     String izin_dinkes;
     String status;
 
+    private LocationManager locationManager;
+    private LocationListener locationListener;
 
 
     @Nullable
@@ -136,6 +153,59 @@ public class InputDataFragment extends Fragment {
 
         View rootView = inflater.inflate(R.layout.fragment_input_data, container, false);
         ButterKnife.bind(this, rootView);
+
+        locationManager = (LocationManager) getActivity().getSystemService(Context.LOCATION_SERVICE);
+        locationListener = new LocationListener() {
+            @Override
+            public void onLocationChanged(Location location) {
+                //check di logcat apakah locationListener sudah bekerja
+                System.out.println("latitude : " + location.getLatitude());
+                System.out.println("longitude : " + location.getLongitude());
+
+                edtGetlat.setText(String.valueOf(location.getLatitude()));
+                edtGetlong.setText(String.valueOf(location.getLongitude()));
+
+            }
+
+            @Override
+            public void onStatusChanged(String provider, int status, Bundle extras) {
+
+            }
+
+            @Override
+            public void onProviderEnabled(String provider) {
+
+            }
+
+            @Override
+            public void onProviderDisabled(String provider) {
+
+            }
+        };
+
+        /*
+        penggunaan this di fragment menggunakan getActivity()
+        atau bisa menggunakan getApplicationContext()
+        * taken from
+        * http://stackoverflow.com/questions/14161892/retrieve-context-from-a-fragment
+        * */
+
+
+        if (ActivityCompat.checkSelfPermission(getActivity(),
+                Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED &&
+                ActivityCompat.checkSelfPermission(getActivity(), Manifest.permission.ACCESS_COARSE_LOCATION)
+                        != PackageManager.PERMISSION_GRANTED) {
+            // TODO: Consider calling
+            //    ActivityCompat#requestPermissions
+            // here to request the missing permissions, and then overriding
+            //   public void onRequestPermissionsResult(int requestCode, String[] permissions,
+            //                                          int[] grantResults)
+            // to handle the case where the user grants the permission. See the documentation
+            // for ActivityCompat#requestPermissions for more details.
+            return null;
+        }
+
+        locationManager.requestLocationUpdates("gps", 5000, 0, locationListener);
 
 
 
@@ -328,9 +398,13 @@ public class InputDataFragment extends Fragment {
             }
         });
 
+        btnGetLocation.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
 
 
-
+            }
+        });
 
 
         fabKirimData.setOnClickListener(new View.OnClickListener() {
@@ -339,10 +413,16 @@ public class InputDataFragment extends Fragment {
                 //ambil value dr edittext
                 notoko = edtIdToko.getText().toString();
                 alamatLokasi = edtAlamatToko.getText().toString();
+                lat_lokasi = edtGetlat.getText().toString();
+                long_lokasi = edtGetlong.getText().toString();
+
 
                 //utk cek value apakah sudah sesuai di logcat
                 System.out.println("no toko : " + notoko);
                 System.out.println("alamat : " + alamatLokasi);
+                System.out.println("latitude : " + lat_lokasi);
+                System.out.println("longitude : " + long_lokasi);
+                //kriteria
                 System.out.println("kriteria 1 : " + s_mrBread);
                 System.out.println("kriteria 2 : " + s_sariroti);
                 System.out.println("kriteria 3 : " + luas_lokasi);
@@ -354,6 +434,9 @@ public class InputDataFragment extends Fragment {
                 System.out.println("kriteria 9 : " + dt_konsumen);
                 System.out.println("kriteria 10 : " + izin_dinkes);
                 System.out.println("nilai status : " + status);
+                System.out.println("lat_lokasi" + lat_lokasi);
+                System.out.println("long_lokasi" + long_lokasi);
+
                 //end cek value
 
                 sendDataToServer();
@@ -367,27 +450,29 @@ public class InputDataFragment extends Fragment {
     private void sendDataToServer() {
         StringRequest request = new StringRequest(Request.Method.POST, URL_INPUT_DATA,
                 new Response.Listener<String>() {
-            @Override
-            public void onResponse(String response) {
-                if (response != null) {
-                    System.out.println(response);
+                    @Override
+                    public void onResponse(String response) {
+                        if (response != null) {
+                            System.out.println(response);
 
-                }
+                        }
 
-            }
-        }, new Response.ErrorListener() {
+                    }
+                }, new Response.ErrorListener() {
             @Override
             public void onErrorResponse(VolleyError error) {
                 error.printStackTrace();
 
             }
-        }){
+        }) {
 
             @Override
             protected Map<String, String> getParams() throws AuthFailureError {
                 Map<String, String> parameters = new HashMap<String, String>();
                 parameters.put("notoko", notoko);
-                parameters.put("alamatLokasi",alamatLokasi);
+                parameters.put("alamatLokasi", alamatLokasi);
+                parameters.put("lat_lokasi", lat_lokasi);
+                parameters.put("long_lokasi", long_lokasi);
                 parameters.put("s_mrBread", s_mrBread);
                 parameters.put("s_sariroti", s_sariroti);
                 parameters.put("luas_lokasi", luas_lokasi);
@@ -399,13 +484,15 @@ public class InputDataFragment extends Fragment {
                 parameters.put("dt_konsumen", dt_konsumen);
                 parameters.put("izin_dinkes", izin_dinkes);
                 parameters.put("status", status);
+                parameters.put("lat", lat_lokasi);
+                parameters.put("lng", long_lokasi);
                 return parameters;
             }
         };
         CustomApp.getInstance().addToRequestQueue(request);
 
         //tambahkan informasi juga data berhasil dikirim
-        Toast.makeText(getActivity(),"Data Berhasil Di input", Toast.LENGTH_SHORT).show();
+        Toast.makeText(getActivity(), "Data Berhasil Di input", Toast.LENGTH_SHORT).show();
     }
 
     @Override

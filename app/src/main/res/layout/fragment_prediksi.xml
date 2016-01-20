@@ -45,42 +45,78 @@
             android:layout_marginTop="25dp"
             >
 
+
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
+                <android.support.v7.widget.CardView
+                    xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                    xmlns:android="http://schemas.android.com/apk/res/android"
+                    android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Id Toko" />
+                    card_view:cardBackgroundColor="#E6E6E6"
+                    card_view:cardCornerRadius="4dp"
+                    card_view:cardElevation="4dp"
+                    android:layout_marginRight="4dp"
+                    >
 
-                <EditText
-                    android:id="@+id/edt_id_toko"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4" />
+                    <!-- Main Content View -->
+                    <RelativeLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+
+                        >
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:orientation="horizontal"
+                            android:id="@+id/linearEdtToko"
+                            >
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Id Toko" />
+
+                            <EditText
+                                android:id="@+id/edt_id_toko"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4" />
+
+                        </LinearLayout>
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginTop="8dp"
+                            android:orientation="horizontal"
+                            android:layout_below="@+id/linearEdtToko"
+                            android:layout_marginBottom="8dp"
+                            >
+
+                            <TextView
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:text="Alamat" />
+
+                            <EditText
+                                android:id="@+id/edt_alamat_toko"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="4" />
+                        </LinearLayout>
+
+                    </RelativeLayout>
+
+                </android.support.v7.widget.CardView>
+
+
             </LinearLayout>
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:orientation="horizontal">
 
-                <TextView
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:text="Alamat" />
-
-                <EditText
-                    android:id="@+id/edt_alamat_toko"
-                    android:layout_width="0dp"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="4" />
-            </LinearLayout>
 
             <LinearLayout
                 android:layout_width="match_parent"
@@ -93,35 +129,58 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="wrap_content"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:layout_marginTop="8dp"
                         android:orientation="vertical">
-
-                        <TextView
+                        <android.support.v7.widget.CardView
+                            xmlns:card_view="http://schemas.android.com/apk/res-auto"
+                            xmlns:android="http://schemas.android.com/apk/res/android"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
-                            android:text="Sales Mr.Bread" />
+                            card_view:cardBackgroundColor="#E6E6E6"
+                            card_view:cardCornerRadius="4dp"
+                            card_view:cardElevation="4dp"
+                            android:layout_marginRight="4dp"
+                            >
 
-                        <RadioGroup
-                            android:id="@+id/rg_smBread"
-                            android:layout_width="wrap_content"
-                            android:layout_height="wrap_content">
-
-                            <RadioButton
-                                android:id="@+id/radio_smBread_ya"
-                                android:layout_width="wrap_content"
+                            <!-- Main Content View -->
+                            <LinearLayout
+                                android:layout_width="match_parent"
                                 android:layout_height="wrap_content"
+                                android:layout_marginTop="8dp"
+                                android:orientation="vertical">
+                                <TextView
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:text="Sales Mr.Bread"
+                                    android:textSize="18sp"
+                                    />
 
-                                android:text="@string/radio_sm_ya" />
+                                <RadioGroup
+                                    android:id="@+id/rg_smBread"
+                                    android:layout_width="wrap_content"
+                                    android:layout_height="wrap_content">
 
-                            <RadioButton
-                                android:id="@+id/radio_smBread_tidak"
-                                android:layout_width="wrap_content"
-                                android:layout_height="wrap_content"
-                                android:text="@string/radio_sm_tidak" />
+                                    <RadioButton
+                                        android:id="@+id/radio_smBread_ya"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
 
-                        </RadioGroup>
+                                        android:text="@string/radio_sm_ya" />
+
+                                    <RadioButton
+                                        android:id="@+id/radio_smBread_tidak"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:text="@string/radio_sm_tidak" />
+
+                                </RadioGroup>
+
+                            </LinearLayout>
+                        </android.support.v7.widget.CardView>
+
+
 
 
                     </LinearLayout>

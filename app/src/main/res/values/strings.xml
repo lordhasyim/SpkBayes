@@ -36,6 +36,7 @@
     <string name="radio_s_tidak_layak">Tidak Layak</string>
     <string name="txt_radio_target_besar">Besar</string>
     <string name="txt_radio_target_kecil">Kecil</string>
+    <string name="title_activity_maps">Map</string>
 
 
 </resources>

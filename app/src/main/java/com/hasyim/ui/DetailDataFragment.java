@@ -71,7 +71,7 @@ public class DetailDataFragment extends AppCompatActivity {
 
         //url delete dengan parameter diambil dari id
         final String idDelete = viewData.getId();
-        final String URL_DELETE = "http://kaptenkomodo.bl.ee/spk/api/deleteData.php?id="+idDelete;
+        final String URL_DELETE = "http://10.0.3.2/spk/api/deleteData.php?id="+idDelete;
 
         //textId.setText(viewData.getId().toString());
 

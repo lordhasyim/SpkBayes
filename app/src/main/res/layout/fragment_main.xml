@@ -68,7 +68,6 @@
                     android:background="@drawable/rounded_button"
                     android:text="Tambah Data"
                     android:textColor="@android:color/white" />
-
                 <Button
                     android:id="@+id/btn_petunjuk"
                     android:layout_width="match_parent"
@@ -80,7 +79,16 @@
                     android:background="@drawable/rounded_button"
                     android:text="Petunjuk"
                     android:textColor="@android:color/white"
-
+                    />
+                <Button
+                    android:id="@+id/btn_lihat_peta"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_below="@+id/btn_petunjuk"
+                    android:layout_marginTop="10dp"
+                    android:background="@drawable/rounded_button"
+                    android:text="Lihat Peta"
+                    android:textColor="@android:color/white"
                     />
 
 

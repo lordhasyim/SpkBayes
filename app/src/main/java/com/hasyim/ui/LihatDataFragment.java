@@ -54,6 +54,8 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
         adapter.setOnItemClickListener(this);
         listLihatData.setAdapter(adapter);
 
+        //refreshing adapter
+        //adapter.notifyDataSetChanged();
 
         getDataFromJson();
 
@@ -75,7 +77,6 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
                     System.out.println(response);
                     ViewDataResponse dataResponse = new Gson().fromJson(response, ViewDataResponse.class);
 
-
                     items.addAll(dataResponse.getData());
                     //for logging in logcat :D
                     System.out.println(items.size());
@@ -90,8 +91,9 @@ public class LihatDataFragment extends Fragment implements ViewDataAdapter.OnIte
                 error.printStackTrace();
             }
         });
-
+        request.setShouldCache(false);
         CustomApp.getInstance().addToRequestQueue(request);
+
     }
 
     @Override

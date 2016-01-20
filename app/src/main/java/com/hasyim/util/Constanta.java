@@ -24,4 +24,7 @@ public class Constanta {
     //URL
     public static final String URL_PREDIKSI = "http://kaptenkomodo.bl.ee/spk/api/prosesBayes.php";
 
+    //URL View Lokasi
+    public static final String URL_ALl_DATA = "http://kaptenkomodo.bl.ee/spk/api/petalokasi.php";
+
 }

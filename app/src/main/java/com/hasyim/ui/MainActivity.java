@@ -97,7 +97,7 @@ public class MainActivity extends AppCompatActivity
         } else if (id == R.id.nav_petunjuk) {
             fm.beginTransaction().replace(R.id.content_frame, new PetunjukFragment()).commit();
 
-        } else if (id == R.id.nav_tentang) {
+
 
         } else if (id == R.id.nav_pengembang) {
 
