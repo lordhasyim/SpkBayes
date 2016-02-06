@@ -1,0 +1,73 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+
+    tools:context="com.hasyim.ui.UserAccessActivity">
+
+
+    <android.support.v4.widget.NestedScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+        xmlns:tools="http://schemas.android.com/tools"
+        android:id="@+id/scrollView"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="10dp"
+            android:layout_marginRight="10dp"
+            android:paddingBottom="25dp">
+
+            <de.hdodenhof.circleimageview.CircleImageView xmlns:app="http://schemas.android.com/apk/res-auto"
+                android:id="@+id/profile_image"
+                android:layout_width="150dp"
+                android:layout_height="150dp"
+                android:layout_alignParentTop="true"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="75dp"
+                android:src="@drawable/logo_saybread"
+                app:civ_border_color="#FF000000"
+                app:civ_border_width="1dp"
+                />
+
+            <Button
+                android:id="@+id/user_btn_manajer"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/profile_image"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="100dp"
+                android:background="@drawable/rounded_button"
+                android:text="Manajer"
+                android:textColor="@android:color/white" />
+            <Button
+                android:id="@+id/user_btn_supervisor"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_btn_manajer"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_button"
+                android:text="Supervisor"
+                android:textColor="@android:color/white" />
+
+            <Button
+                android:id="@+id/user_btn_petunjuk"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/user_btn_supervisor"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="24dp"
+                android:background="@drawable/rounded_button"
+                android:text="Petunjuk"
+                android:textColor="@android:color/white" />
+
+
+        </RelativeLayout>
+    </android.support.v4.widget.NestedScrollView>
+    <include
+        android:id="@+id/spv_main_toolbar"
+        layout="@layout/spv_toolbar"></include>
+</RelativeLayout>

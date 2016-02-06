@@ -1,0 +1,26 @@
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context="com.hasyim.ui.SpvLihatDataFragment">
+
+    <!-- TODO: Update blank fragment layout -->
+    <TextView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="List Datatraining"
+        android:background="@color/colorPrimary"
+        android:gravity="center"
+        android:textSize="18sp"
+        android:textColor="@android:color/white"
+        android:padding="5dp" />
+
+    <android.support.v7.widget.RecyclerView
+        android:paddingTop="35dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:id="@+id/spv_list_lihat_data"
+        />
+
+
+</FrameLayout>

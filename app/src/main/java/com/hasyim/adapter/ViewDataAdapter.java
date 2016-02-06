@@ -74,7 +74,7 @@ public class ViewDataAdapter extends RecyclerView.Adapter<ViewDataAdapter.ViewHo
 
     public class ViewHolder extends RecyclerView.ViewHolder {
 
-        @Bind(R.id.area_item)
+        @Bind(R.id.spv_area_item)
         LinearLayout areaItem;
         @Bind(R.id.txt_id)
         TextView txtId;
